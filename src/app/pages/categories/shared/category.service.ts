@@ -31,6 +31,7 @@ export class CategoryService {
       catchError(this.handleError),
       map(this.jsonDataToCategory)
     )
+    
   }
 
   createCategory(category: Category): Observable<Category> {
