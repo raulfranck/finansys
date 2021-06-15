@@ -37,7 +37,9 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     this.loadCategory();
   }
 
-  ngAfterContentChecked() {}
+  ngAfterContentChecked() {
+    this.setPageTitle();
+  }
 
   // Private methods
   private setCurrentAction() {
@@ -54,6 +56,32 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
       name: [null, [Validators.required, Validators.minLength(2)]],
       description: [null]
     })
+  }
+
+
+  // Caso não aparece a Categoria para edição, rever esse trecho do código.
+  private loadCategory() {
+    if (this.currentAction == "edit") {
+      this.route.paramMap.pipe(
+        switchMap(params => this.categoryService.getById(Number(params.get('id'))))
+      )
+      .subscribe(
+        (category) =>{
+          this.category = category;
+          this.categoryForm.patchValue(category)
+        },
+        (error) => alert('Não funciou!')
+      )
+    }
+  }
+
+  private setPageTitle() {
+    if (this.currentAction == 'new') {
+      this.pageTitle = 'Cadastro de nova Categoria'
+    } else {
+      const categoryName = this.category.name || ""
+      this.pageTitle = 'Editando categoria'
+    }
   }
 
 }
