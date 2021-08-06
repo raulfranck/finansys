@@ -1,3 +1,4 @@
+
 import { Category } from "../../categories/shared/category.model";
 
 export class Entry {
@@ -8,12 +9,12 @@ export class Entry {
         public type?: string,
         public amount?: string,
         public date?: string,
-        public paid?: string,
+        public paid?: boolean,
         public categoryId?: string,
-        public category?: Category
-    ) {}
-
-    static types = {
+        public category?: Category,
+        ) {}
+        
+        static types = {
         expense: 'Despesa',
         reveneu: 'Receita'
     }
