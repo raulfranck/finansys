@@ -35,6 +35,8 @@ export class EntryService {
   }
 
   createEntry(entry: Entry): Observable<Entry> {
+    
+
     return this.http.post(this.apiPath, entry).pipe(
       catchError(this.handleError),
       map(this.jsonDataToEntry)
